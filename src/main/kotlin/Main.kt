@@ -32,6 +32,6 @@ fun transaction(cartType: String = "Vk Pay", amountRecently: Int, amount: Int): 
         }
         result
     }
-    else return -2
+    else return "Превышен лимит трансакций."
 
 }
