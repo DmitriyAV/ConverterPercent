@@ -24,7 +24,7 @@ fun transaction(cartType: String = "Vk Pay", amountRecently: Int, amount: Int): 
 
     return if (amountRecently !in maxAmountForCartInDay..maxAmountForCartInMounth){
         val result = when {
-            cartType == "Vk Pay" -> if (amount > maxAmountForVkAtOnce || amountRecently >= maxAmountForVkAtMounth ) errorLimit else amount / convertToRub
+            cartType === "Vk Pay" -> if (amount > maxAmountForVkAtOnce || amountRecently >= maxAmountForVkAtMounth ) errorLimit else amount / convertToRub
             cartType === "Maestro" || cartType === "Mastercard" -> if (amountRecently in amountMinForCartMM..amountMaxForCartMM) amount / convertToRub else
                 ((amount / convertToRub) - (((amount / convertToRub) * precentForMM) + amountAfterLimit)) / convertToRub
             cartType === "Visa" || cartType === "Мир" -> if (amount < amountMinForCartViWo) errorAmount else (amount - ((amount / convertToRub) * percentForViWo)) / convertToRub
